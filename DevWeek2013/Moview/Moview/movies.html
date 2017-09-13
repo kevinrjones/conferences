@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.8.2.js"></script>
+    <script src="Scripts/knockout-2.2.1.js"></script>
+    <style>
+        body {
+            font-size: 24px;
+        }
+        .binds {
+            background-color: silver;
+        }
+    </style>
+</head>
+    <body>
+        <div>
+            Title:
+        </div>
+        <div class="binds" data-bind="text: title"></div>
+        <div>Name:</div>
+        <div class="binds" data-bind="text: name"></div>
+        <div>
+            <input type="text" data-bind="value: firstName, valueUpdate: 'afterkeydown'" />
+        </div>
+        <div>
+            <span data-bind="text: title, click: onClick" />
+        </div>
+        <ul data-bind="foreach: actors">
+            <li data-bind="text: name"></li>
+        </ul>
+        <input type="checkbox" data-bind="checkbox: true"/>
+    </body>
+    <script type="text/javascript">
+        function Actor(name) {
+            var self = this;
+
+            self.name = name;
+        }
+        
+
+        function Movie() {
+            var self = this;
+            self.title = ko.observable("The Mummy");            
+            self.firstName=ko.observable("Stephen");
+            self.lastName= ko.observable("Sommers");
+            self.name = ko.computed(function() {
+                return self.firstName() + " " + self.lastName();
+            });
+            self.actors = ko.observableArray([new Actor("Fraser"), new Actor("Rachel")]);
+
+            self.onClick = function() {
+                self.actors.push(new Actor('Brendan'));
+            };
+        }
+
+        var movie = new Movie();
+
+        $(function() {
+            ko.applyBindings(movie);
+        });
+
+    </script>
+</html>

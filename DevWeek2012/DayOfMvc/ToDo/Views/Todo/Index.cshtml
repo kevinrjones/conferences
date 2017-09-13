@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ToDo.Models.ListTodoVM>
+@{
+    ViewBag.Title = "TodoList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="todos">
+    <table>
+        @foreach (var todo in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(todo.Title, "Edit", new{Id = todo.Id})</td>
+                <td>@todo.Entry</td>
+            </tr>
+        }
+    </table>
+    <section class="links">
+        @Html.ActionLink("New Todo", "New")
+    </section>
+</section>

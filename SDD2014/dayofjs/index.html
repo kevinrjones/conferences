@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/requirejs/require.js"
+            data-main="app/req"></script>
+    <script type="text/javascript">
+        require.config({
+           baseUrl: 'modules',
+            paths:{
+                services: 'app/v1/services'
+            }
+        });
+    </script>
+</head>
+<body>
+
+<button id="clickme">Click Me</button>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!--<script src="simplefuncs.js.js"></script>-->
+<!--<script src="callfuncs.js"></script>-->
+<!--<script src="closures.js"></script>-->
+<!--<script src="oojs.js"></script>-->
+<!--<script src="modules.js"></script>-->
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿@model System.Collections.Generic.List<ToDo.Models.ToDoListViewModel>
+
+@{
+    ViewBag.Title = "Todo";
+}
+
+<h2>Todo</h2>
+
+<section class="todos">
+    <table>
+        @foreach(var m in Model)
+        {
+            <tr><td>@m.Title</td><td>@m.Entry</td></tr>
+        }
+    </table>
+</section>

@@ -1,0 +1,12 @@
+﻿@model Moview.Models.MovieDetails
+<li>
+    
+    <span style="color: blueviolet">
+        @Html.ActionLink(Model.Title, "Get", new {id = Model.Id})
+        @Ajax.ActionLink(Model.Title, "Get", new {id = Model.Id}, 
+                        new AjaxOptions{UpdateTargetId = "details"})
+    </span>
+    <span>
+        @Model.Director
+    </span>
+</li>

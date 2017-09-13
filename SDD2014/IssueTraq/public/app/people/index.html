@@ -1,0 +1,26 @@
+<div>
+    <data-sdd-simple>Hello From The Transcluded Text</data-sdd-simple>
+    <data-sdd-person-details></data-sdd-person-details>
+    <div ng-repeat="person in vm.person">
+        <div>
+            First name: <span data-ng-bind="person.firstname"></span>
+        </div>
+        <div>
+            Last name: <span>{{ person.lastname }} </span>
+        </div>
+        <div>
+            First name: <input type="text" data-ng-model="person.firstname"/>
+        </div>
+        <ul>
+            <li data-ng-repeat="child in person.children">
+                <a data-ng-href="person/{{child.id}}">
+                    {{ child.name }}
+                </a>
+            </li>
+        </ul>
+        <div data-ng-bind="vm.date | date:'fullDate'"></div>
+        <div>
+            <span data-ng-bind="vm.now"></span>
+        </div>
+    </div>
+</div>

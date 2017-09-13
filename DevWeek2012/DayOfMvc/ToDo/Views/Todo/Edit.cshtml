@@ -1,0 +1,15 @@
+﻿@model ToDo.Models.NewTodo
+@{
+    ViewBag.Title = "Edit Todo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Edit Todo</h2>
+@using (Html.BeginForm("Update", "todo", new { }, FormMethod.Post, new { @class = "foo" }))
+{
+    <fieldset>
+        <legend>Update Todo</legend>
+        @Html.HiddenFor(m => m.Id)
+        @Html.Partial("_NewUpdatePartial", Model)
+        <input type="Submit" value="Update" />
+    </fieldset>
+}

@@ -1,0 +1,74 @@
+﻿@using Todo.HtmlHelpers
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> 
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> 
+<![endif]-->
+<!--[if IE 7]>
+    <html class="no-js lt-ie9 lt-ie8" lang="en"> 
+<![endif]-->
+<!--[if IE 8]>    
+    <html class="no-js lt-ie9" lang="en"> 
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/favicon.ico">
+    @Styles.Render("~/bundles/less")
+    @Styles.Render("~/bundles/content/bootstrap")
+    @Styles.Render("~/bundles/content/metrobootstrap")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css")
+</head>
+<body style="padding: 60px 0">
+    <div class="container-fluid">
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand">Todo</a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#"><i class="icon-home icon-white"></i>Home</a></li>
+                            <li data-bind="visible: user.isAuthenticated">@Html.ActionLink("Deregister", "Delete", "User", new { }, new { id = "deregister" })</li>
+                            <li data-bind="visible: user.isAuthenticated">@Html.ActionLink("Logout", "Delete", "Session", new { }, new { id = "logout" })</li>
+                            <li data-bind="visible: !user.isAuthenticated()">@Html.ActionLink("Login", "New", "Session", new { }, new { id = "login" })</li>
+@*                            <li data-bind="visible: user.isAuthenticated()"><a href="/login" data-bind="    click: user.logout">Login</a></li>
+                            <li data-bind="visible: !user.isAuthenticated()"><a href="/login" data-bind="    click: user.logout">Login</a></li>*@
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li><a href="signin">Signin</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@Html.Partial("~/views/session/_UserUI.cshtml")*@
+    <div class="container">
+        <div>@TempData["message"]</div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerymigrate")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/signalr")
+    <script type="text/javascript" src="@Url.Content("~/signalr/hubs")"></script>
+    @Scripts.Render("~/bundles/other")
+    @Scripts.Render("~/bundles/todo")
+    @RenderSection("scripts", required: false)
+</body>
+@Html.IncludeResources()
+</html>
+

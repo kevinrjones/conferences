@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/knockout-3.1.0.debug.js"></script>
+    <script src="Scripts/jquery-2.1.0.js"></script>
+    <script src="Scripts/app.js"></script>
+    <style>
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <span data-bind="text: firstName"></span>
+    </div>
+    <div>
+        <span data-bind="text: lastName"></span>
+    </div>
+    <div data-bind="css: {red: color}">
+        <span data-bind="text: name">
+
+        </span>
+    </div>
+    <div>
+        <input data-bind="value: firstName, valueUpdate: 'afterkeydown', enable:false" />
+    </div>
+
+    <div data-bind="if: children().length > 0">
+        <ul data-bind="foreach: children">
+            <li data-bind="text: name, click: function(){debugger}"></li>
+        </ul>
+    </div>
+
+    <ul data-bind="foreach: pets">
+        <li data-bind="text: $data"></li>
+    </ul>
+
+    <div>
+        <input type="text" data-bind="value: childName" />
+    </div>
+    <div data-bind="foo: true, click: addChild()">Add Child</div>
+
+    <script>
+
+        function Child(name) {
+            this.name = ko.observable(name);
+        }
+
+        function Person() {
+            var self = this;
+
+            this.childName = ko.observable("");
+            this.firstName = ko.observable("Kevin");
+            this.lastName = ko.observable("Jones");
+            this.addChild = function () {
+                console.log("add a child");
+                self.children.push(new Child(self.childName()));
+            }
+            this.children = ko.observableArray([
+                new Child("Harry"),
+                new Child("Sam"),
+                new Child("Alex")
+            ]);
+
+            this.pets = ["Bernie", "Jasper"];
+
+            this.name = ko.computed(function () {
+                return self.firstName() + " " + self.lastName();
+            });
+
+            this.color = ko.observable(true);
+
+        }
+
+        $(function () {
+            var kevin = new Person();
+
+            ko.bindingHandlers({
+                foo: {
+                    init: function() {},
+                    update: function() {}
+                }
+            });
+
+            ko.applyBindings(kevin);
+        });
+    </script>
+</body>
+
+</html>

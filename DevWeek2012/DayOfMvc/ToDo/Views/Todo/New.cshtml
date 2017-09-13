@@ -1,0 +1,15 @@
+﻿@model ToDo.Models.NewTodo
+@{
+    ViewBag.Title = "Add New Todo Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Add New Todo Item</h2>
+@using (Html.BeginForm("Create", "todo", FormMethod.Post, new { @class = "form" }))
+{
+    Html.EnableClientValidation();
+    <fieldset>
+        <legend>Create Todo</legend>
+        @Html.Partial("_NewUpdatePartial", Model)
+        <input type="Submit" value="Create" />
+    </fieldset>
+}

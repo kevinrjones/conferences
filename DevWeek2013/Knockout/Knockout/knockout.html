@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.8.2.js"></script>
+    <script src="Scripts/knockout-2.2.0.js"></script>
+    <script src="Scripts/jquery-ui-1.9.2.js"></script>
+    <style>
+        .silver {
+            background-color: silver;
+        }
+    </style>
+</head>
+    <body>
+        <div>
+            Address:
+        </div>
+        <div data-bind="with: address">
+        <div data-bind="text: line"></div>
+            </div>
+        <div>
+            First Name:
+        </div>
+        <div>
+            <span data-bind="text: firstName"></span>
+        </div>
+        <div>
+            Last Name:
+        </div>
+        <div>
+            <span data-bind="text: lastName"></span>
+        </div>
+        <div>
+            Name:
+        </div>
+        <div>
+            <span data-bind="text: name"></span>
+        </div>
+        <div>
+            Last Name:
+        </div>
+        <div>
+            <input type="text" data-bind="value: childName, valueUpdate: 'afterkeydown'"/>
+        </div>
+        <div>
+            <input type="button" data-bind="value: buttonText, click: onClick"/>
+        </div>
+        <div data-bind="css: {silver: children().length === 0}">
+            Kevin has 
+            <span data-bind="text: children().length"></span> 
+            children
+        </div>
+        <ul data-bind="foreach: children">
+            <li data-bind="text: name, click: function () { debugger}"></li>
+        </ul>
+        <input type="text" data-bind="datetime: true"/>
+    </body>
+    <script type="text/javascript">
+        
+        ko.bindingHandlers.datetime = {
+            init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+                $.datepicker(element);
+            }
+        };
+
+
+        function Child(name) {
+            var self = this;
+
+            self.name = name;
+        }
+
+        function Address() {
+            var self = this;
+
+            self.line = "First line of address!";
+        }
+
+        
+
+        function Person() {
+            var self = this;
+
+            self.address = new Address();
+            self.children = ko.observableArray([]);
+            self.firstName = ko.observable("Kevin");
+            self.lastName = ko.observable("Jones");
+            self.foo = ko.computed({
+                read: function() {
+                },
+                write: function() {
+                }
+            });
+            self.name = ko.computed(function () {
+                return self.firstName() + " " + self.lastName();
+            });
+            self.buttonText = "Click Me!";
+            self.onClick = function () {
+                self.children.push(new Child(self.childName()));
+            };
+
+            self.childName = ko.observable();
+        }
+
+        var kevin = new Person();
+
+        $(function () {
+            ko.applyBindings(kevin);
+        });
+    </script>
+</html>

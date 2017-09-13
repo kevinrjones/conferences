@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Moview.Models.MovieDetails>
+@{
+    ViewBag.Title = "Movies Index";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+<h2>Movies</h2>
+
+<h2>@DateTime.Now</h2>
+
+<ul>
+    @foreach (var details in Model)
+    {
+        @Html.Partial("_MovieDetailsListItem", details)
+    }
+</ul>
+<div id="details"></div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            console.log("Hello");
+        })
+
+    </script>    
+}

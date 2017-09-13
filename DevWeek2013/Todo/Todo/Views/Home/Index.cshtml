@@ -1,0 +1,33 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/views/shared/_Layout.cshtml";
+}
+
+<style>
+
+</style>
+
+<div id="main" data-bind="visible: user.isAuthenticated" style="width: 80%; margin: 0 auto">
+    <div>
+        <h3>Add todo</h3>
+        <form class="form-inline">
+            <input type="text" data-bind="value: todo().todoText" placeholder="Todo" name="todoText" class="input-xlarge" />
+            <input type="text" class="input-small" data-bind="datepicker: true, value: todo().todoDate" placeholder="Todo date" name="todoDate" />
+            <input class="btn btn-primary btn-small" type="button" data-bind="click: addTodo, value: addTodoText" name="todoAdd" />
+        </form>
+    </div>
+    <div class="listview minimumheight todolist">
+        <ul class="todolist unstyled" id="todoList" data-bind="foreach: todos.items, visible: todos.any()">
+            <li data-bind="click: onClick, css: { selected: isSelectedOrChecked, dragging: isDragging }, style: { top: offsetY() + 'px' }, event: { mousedown: onMouseDown }" style="position: relative">
+                <span class="checkbox-container">
+                    <input class="large" type="checkbox" data-bind="clickBubble: false, checked: isChecked, checkbox: true, click: function () { return true; }, event: { mousedown: function (item, e) { }, mouseup: function (item, e) { } }, mouseupBubble: false, mousedownBubble: false" />
+                </span>
+                <span class="todoItemText" data-bind="text: displayTitle"></span>
+                <span class="todoItemDate" data-bind="text: displayDate"></span>
+                <button type="button" class="close todoItemClose" data-bind="click: remove">&times;</button>
+            </li>
+        </ul>
+    </div>
+</div>
